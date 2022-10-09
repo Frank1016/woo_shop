@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:woo_shop/common/app_colors.dart';
 import 'package:woo_shop/common/assets.dart';
+import 'package:woo_shop/pages/welcome.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -18,12 +19,19 @@ class _SplashPageState extends State<SplashPage> {
     number = duration;
     for (var i = 0; i < duration; i++) {
       await Future.delayed(const Duration(seconds: 1), () {
-        if (mounted == true) {
+        if (mounted) {
           setState(() {
             number--;
           });
         }
       });
+    }
+    if (number == 0 && mounted) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const WelcomePage(),
+          ));
     }
   }
 
@@ -62,7 +70,7 @@ class _SplashPageState extends State<SplashPage> {
       text,
       style: const TextStyle(
           fontSize: 19,
-          fontFamily: "Poppins",
+          //fontFamily: "Poppins",
           fontWeight: FontWeight.bold,
           color: Colors.white,
           height: 22 / 19),
